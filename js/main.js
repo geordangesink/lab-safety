@@ -9,7 +9,7 @@ video.src = `assets/videos/scene-${ sceneNum }-snippet-${ cutNum }.mp4`;
 video.onended = quiz;
 
 
-async function quiz(){
+function quiz(){
 
     if ( ( sceneNum === 1 || sceneNum === 2 ) && cutNum < 4 ){
         
