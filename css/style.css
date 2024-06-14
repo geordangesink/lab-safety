@@ -22,9 +22,19 @@
 /*******************************************/
 
 body {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+iframe, img{
+  width: 1280px;
+  height: 720px;
+}
+
+.hide{
+  display: none;
+}
 
 /******************************************
 /* LAYOUT
