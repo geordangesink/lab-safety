@@ -3876,7 +3876,7 @@ input, select, textarea {
 	#intro {
 		background-attachment: fixed;
 		/* background-image: url("images/intro.svg"); */
-		background: linear-gradient(rgba(25, 10, 160, 0.158), rgba(5, 7, 107, 0.212)), 
+		background: linear-gradient(rgba(0, 0, 0, 0.808), rgba(10, 10, 63, 0.733)), 
   		url("../images/banner.png");
   		background-repeat: no-repeat;
   		background-size: contain;
