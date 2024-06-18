@@ -3,13 +3,54 @@
 let dimensions = {
     standartScreenWidth: 1280,
     scalar: 1,
-    // coordinates for map areas sorted as [scene][cut][area]
+    // coordinates for map areas sorted as [scene][cut][area][coordinates]
     sceneCutArea: [
-[ [ [620,453,641,424,677,416,685,453,657,466] ] ],
-[ [ [483,110,513,144,505,194,462,194,459,157],[676,717,540,694,595,643,718,661,710,706],[604,120,565,422,729,411,694,286,741,141] ] , [ [1040,0,1029,226,1112,336,1116,245,1092,14],[682,0,671,19,704,41,726,27,741,0],[519,401,607,469,784,414,604,385,550,258],[24,501,225,719,510,574,445,490,299,425] ] , [ [346,249,571,272,547,350,420,319,341,289],[635,467,600,591,734,623,788,587,673,469],[764,420,762,477,893,480,905,425,821,410] ] ],
-[ [ [865,482,784,528,842,550,924,509],[827,342,779,336,744,402,812,417,838,383],[360,37,378,311,516,309,568,181,550,95] ] , [ [303,228,247,269,300,313,344,288,355,255] ] , [ [366,397,363,460,391,476,403,441,391,389] ] ],
-[ [ [421,404,482,394,477,315,439,313,418,358],[832,238,799,339,824,358,859,321,862,262],[261,220,127,451,243,580,396,534,414,257],[453,244,504,385,668,604,715,477,628,219],[761,231,717,529,953,523,948,227,797,392] ] ]
-]
+        [   
+            [ 
+                [620,453,641,424,677,416,685,453,657,466] 
+            ] 
+        ],
+        [ 
+            [ 
+                [483,110,513,144,505,194,462,194,459,157],
+                [676,717,540,694,595,643,718,661,710,706],
+                [604,120,565,422,729,411,694,286,741,141] 
+            ], 
+            [ 
+                [1040,0,1029,226,1112,336,1116,245,1092,14],
+                [682,0,671,19,704,41,726,27,741,0],
+                [519,401,607,469,784,414,604,385,550,258],
+                [24,501,225,719,510,574,445,490,299,425] 
+            ], 
+            [ 
+                [346,249,571,272,547,350,420,319,341,289],
+                [635,467,600,591,734,623,788,587,673,469],
+                [764,420,762,477,893,480,905,425,821,410] 
+            ] 
+        ],
+        [ 
+            [ 
+                [865,482,784,528,842,550,924,509],
+                [827,342,779,336,744,402,812,417,838,383],
+                [360,37,378,311,516,309,568,181,550,95] 
+            ], 
+            [ 
+                [303,228,247,269,300,313,344,288,355,255] 
+            ], 
+            [ 
+                [366,397,363,460,391,476,403,441,391,389] 
+            ] 
+        ],
+        [ 
+            [
+                [421,404,482,394,477,315,439,313,418,358],
+                [832,238,799,339,824,358,859,321,862,262],
+                [261,220,127,451,243,580,396,534,414,257],
+                [453,244,504,385,668,604,715,477,628,219],
+                [761,231,717,529,953,523,948,227,797,392] 
+            ] 
+        ]
+    ]
 }
 
 // adjust hotspot map to image size
@@ -19,8 +60,10 @@ window.addEventListener('resize', function(){
     }
 });
 
+let totalPoints = 0;
 let mapTotalPoints = new Array();
 
+let points = document.querySelector("#points");
 let video = document.querySelector( "#video" );
 let image = document.querySelector( "#image" );
 let hotspots = document.querySelectorAll( ".hotspots" );
@@ -97,8 +140,9 @@ async function quiz(){
 
 // play next video
 function nextVideo(){
+    // totalPoints += mapTotalPoints.reduce((acc,c) => acc + c , 0);
         // Show points in DOM
-    document.querySelector("#headline").textContent += mapTotalPoints.reduce((acc,c) => acc + c , 0);
+    points.textContent = `Points : ${totalPoints}`;
     mapTotalPoints = [];
         // Hide Screenshot and show Next Video
     image.classList.add( "hide" );
@@ -137,38 +181,41 @@ async function adjustMap(){
         // make space in array for points
         mapTotalPoints.push(0);
     }
+    adjustPoints();
+}
+
+function adjustPoints(){
+    // make space in array for points
+    mapTotalPoints.push(0);
 
     // click function for each hotspot
     hotspot.onclick = function(event){
         event.preventDefault();
         clicking(0);
-        hotspot.style.border = "thick solid #0000FF";
     }
     hotspot2.onclick = function(event){
         event.preventDefault();
         clicking(1);
-        hotspot2.style.border = "thick solid #0000FF";
     }
     hotspot3.onclick = function(event){
         event.preventDefault();
         clicking(2);
-        hotspot3.style.border = "thick solid #0000FF";
     }
     hotspot4.onclick = function(event){
         event.preventDefault();
         clicking(3);
-        hotspot4.style.border = "thick solid #0000FF";
     }
     hotspot5.onclick = function(event){
         event.preventDefault();
         clicking(4);
-        hotspot5.style.border = "thick solid #0000FF";
     }
-
+    // If it has NOT bee klicked yet, add one point to score
     function clicking(num){
+        if ( mapTotalPoints[num] !== 1 ){
+            totalPoints += 1;
+            points.textContent = `Points : ${totalPoints}`;
+        }
         mapTotalPoints[num] = 1;
-        console.log(mapTotalPoints);
-        alert("test");
     }
 }
 
