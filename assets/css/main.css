@@ -6,6 +6,13 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+#safety-quiz{
+	width: 1280px;
+	height: 720px;
+}
+
+
+
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -131,6 +138,10 @@ input, select, textarea {
 		}
 
 		@media screen and (max-width: 1280px) {
+			#safety-quiz{
+				width: 720px;
+				height: 405px;
+			}
 
 			body, input, select, textarea {
 				font-size: 12pt;
@@ -235,6 +246,11 @@ input, select, textarea {
 	}
 
 	@media screen and (max-width: 736px) {
+
+		#safety-quiz{
+			width: 444px;
+			height: 250px;
+		}
 
 		h1 {
 			font-size: 2em;
@@ -3912,6 +3928,15 @@ input, select, textarea {
 			}
 
 		}
+		@media screen and (max-width: 480px) {
+
+			#safety-quiz{
+				width: 303px;
+				height: 170px;
+			}
+
+	
+		}
 
 #button-lab-safety, #button-waste{
 	background-color: #5c79d8;
@@ -3931,5 +3956,15 @@ input, select, textarea {
 }
 
 #image, #video{
+	width: 100%;
+}
+
+#safety-page{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#safety-page > h1{
 	width: 100%;
 }
