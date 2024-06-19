@@ -3968,3 +3968,12 @@ input, select, textarea {
 #safety-page > h1{
 	width: 100%;
 }
+
+#points{
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+
+#total-points{
+	margin-bottom: 10px;
+}

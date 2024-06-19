@@ -64,6 +64,7 @@ let totalPoints = 0;
 let mapTotalPoints = new Array();
 
 let points = document.querySelector("#points");
+let nextClip = document.querySelector("#next-clip");
 let video = document.querySelector( "#video" );
 let image = document.querySelector( "#image" );
 let hotspots = document.querySelectorAll( ".hotspots" );
@@ -79,6 +80,7 @@ let cutNum = 0;
 // Start at this video when refreshing page
 video.src = `assets/videos/scene-${ sceneNum }-snippet-${ cutNum }.mp4`;
 
+nextClip.addEventListener("click", nextVideo);
 video.onended = quiz;
 
 // start hotspot quiz
@@ -104,10 +106,12 @@ async function quiz(){
         // create map of hotspot areas
         await updateSceneAndCut(sceneNum, cutNum);
         await adjustMap();
-
+        
         // Next snippet
         cutNum++;
-        document.onkeydown = nextVideo;
+        nextClip.classList.remove("hide");
+        // document.onkeydown = nextVideo;
+
     }
 
     // If at the end of scene 1 or 2
@@ -131,18 +135,21 @@ async function quiz(){
         await adjustMap();
 
         // show end picture
-        document.onkeydown = function(){
+        nextClip.classList.remove("hide");
+        nextClip.addEventListener("click", function(){
             image.src = "assets/images/end-pic.JPG";
-        }
+            nextClip.classList.add("hide");
+        });
     }
 
 }
 
 // play next video
 function nextVideo(){
+    nextClip.classList.add("hide");
     // totalPoints += mapTotalPoints.reduce((acc,c) => acc + c , 0);
         // Show points in DOM
-    points.textContent = `Points : ${totalPoints}`;
+    points.textContent = `Current Points : ${totalPoints}`;
     mapTotalPoints = [];
         // Hide Screenshot and show Next Video
     image.classList.add( "hide" );
@@ -181,6 +188,10 @@ async function adjustMap(){
         // make space in array for points
         mapTotalPoints.push(0);
     }
+    // loop through the rest amd set their coords to 0
+    for ( spot = dimensions.sceneCutArea[sceneNum][cutNum].length; spot < 5; spot++){
+        hotspots[spot].coords = "0, 0, 0, 0, 0, 0, 0, 0, 0, 0";
+    }
     adjustPoints();
 }
 
@@ -211,9 +222,10 @@ function adjustPoints(){
     }
     // If it has NOT bee klicked yet, add one point to score
     function clicking(num){
+        console.log(num);
         if ( mapTotalPoints[num] !== 1 ){
             totalPoints += 1;
-            points.textContent = `Points : ${totalPoints}`;
+            points.textContent = `Current Points : ${totalPoints}`;
         }
         mapTotalPoints[num] = 1;
     }
