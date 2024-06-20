@@ -24,15 +24,17 @@ let dimensions = {
             ], 
             [ 
                 [346,249,571,272,547,350,420,319,341,289],
-                [635,467,600,591,734,623,788,587,673,469],
-                [764,420,762,477,893,480,905,425,821,410] 
+                [636,468,607,583,688,619,784,595,672,466],
+                [737,432,857,540,1035,504,1094,311,941,258],
+                [916,511,890,522,885,633,944,637,943,523] 
             ] 
         ],
         [ 
             [ 
-                [865,482,784,528,842,550,924,509],
+                [789,526,868,485,924,508,845,549,796,536],
                 [827,342,779,336,744,402,812,417,838,383],
-                [360,37,378,311,516,309,568,181,550,95] 
+                [470,563,356,562,249,719,480,717,509,597],
+                [360,37,378,311,516,309,568,181,550,95]
             ], 
             [ 
                 [303,228,247,269,300,313,344,288,355,255] 
@@ -67,6 +69,7 @@ let points = document.querySelector("#points");
 let nextClip = document.querySelector("#next-clip");
 let video = document.querySelector( "#video" );
 let image = document.querySelector( "#image" );
+let overlay = document.querySelector( "#overlay" );
 let hotspots = document.querySelectorAll( ".hotspots" );
 let hotspot = document.querySelector("#hotspot-1");
 let hotspot2 = document.querySelector("#hotspot-2");
@@ -221,11 +224,18 @@ function adjustPoints(){
         clicking(4);
     }
     // If it has NOT bee klicked yet, add one point to score
-    function clicking(num){
+    async function clicking(num){
         console.log(num);
         if ( mapTotalPoints[num] !== 1 ){
             totalPoints += 1;
             points.textContent = `Current Points : ${totalPoints}`;
+            
+            for ( i = 0; i < 2; i++ ){
+                overlay.style.opacity = "0.8";
+                await new Promise(resolve => setTimeout(resolve, 150));
+                overlay.style.opacity = "0";
+                await new Promise(resolve => setTimeout(resolve, 150));
+            }
         }
         mapTotalPoints[num] = 1;
     }
