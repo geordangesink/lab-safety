@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="counter">Incorrect Attempts: 0</div>
+    <div id="container">
+        <img src="images/background.JPG" alt="Background" id="background">
+        <div class="draggable-container" id="draggable1-container">
+            <img src="images/draggable.jpg" alt="Draggable 1" class="draggable" id="draggable1" draggable="true">
+            <label for="draggable1">Draggable 1</label>
+        </div>
+        <div class="draggable-container" id="draggable2-container">
+            <img src="images/draggable.jpg" alt="Draggable 2" class="draggable" id="draggable2" draggable="true">
+            <label for="draggable2">Draggable 2</label>
+        </div>
+        <div class="draggable-container" id="draggable3-container">
+            <img src="images/draggable.jpg" alt="Draggable 3" class="draggable" id="draggable3" draggable="true">
+            <label for="draggable3">Draggable 3</label>
+        </div>
+        <div class="dropbox" id="dropbox1"></div>
+        <div class="dropbox" id="dropbox2"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
