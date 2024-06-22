@@ -30,11 +30,17 @@
 			<div id="wrapper">
 
 				<!-- Main -->
+					<audio id="audio" loop>
+						<source src="assets/audio/hit-the-road-jack.mp3" type="audio/mp3">
+						Your browser does not support the audio element.
+					</audio>
 					<section id="main" class="wrapper">
 						<div id="safety-page" class="inner">
 							<h1 id="headline" class="major">Safety Video/Quiz</h1>
+							<button id="music-button">Music Off/On</button>
 							<div id="safety-quiz">
 								<img usemap="#hotspot-map" class="hide" id="image" src="#" alt="" />
+								<img class="hide" id="end-image" src="assets/images/end-pic.JPG" alt="" />
 								<div id="overlay-green" class="overlay"></div>
 								<div id="overlay-red" class="overlay"></div>
 								<map name="hotspot-map">
@@ -79,30 +85,40 @@
 										alt="hotspot"
 									>
 								</map>
-								<video class="" id="video"
+								<video class="hide" id="video"
 									controls
 
 									poster="initialimage.png"
-									autoplay
-									muted 
+									
+									
 									>
 									<!-- (its a comment so currently not muted (needs to go under autoplay)) -->
-									<source id="video-source" src="#" type="video/mp4"/>
+									<source id="video-source" src="" type="video/mp4"/>
 								</video>
+								<div id="text-wrapper" class="">
+									<p id="answers" class=""><b>Find whats wrong and click it in the picture!</b> <br><br>Each wrong thing will only show up in one picture (maybe multiple times). <br>There can be multiple wrong things to click in one picure. <br>In the bottom right below the image you can see how many things you need to spot. <br>If your selection was false, the screen flashes red, if you are correct, green.</p>
+								</div>
 							</div>
+
+							<p id="end-text" class="hide"></p>
+
 							<div id="buttons-container">
-								<button id="rules" class="">Rules</button>
+								<button id="rules" class="hide">Rules</button>
 								<div id="next-clip-container">
-									<button id="next-clip" class="hide">Next Clip</button>
+									<button id="next-clip" class="">Start</button>
 								</div>
 							</div>
 							<div id="scoreboard">
 								<div id="player-points">
-									<p id="points">Total Points : 0</p>
+									<p><b>Player</b></p>
+									<p id="points-currently">Points (This Image) : 0</p>
 									<p id="wrong">Total False Answers : 0</p>
+									<p id="points">Total Points : 0</p>
 								</div>
 								<div id="possible-points">
+									<p><b>Quiz</b></p>
 									<p id="points-image">Possible Points For This Image : -</p>
+									<p id="spacer"></p>
 									<p id="total-points">Total Possible Points : -</p>
 								</div>
 							</div>

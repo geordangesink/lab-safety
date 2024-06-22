@@ -80,26 +80,33 @@ window.addEventListener('resize', function(){
 });
 
 let rulesText = "Find whats wrong and click it in the picture! \nEach wrong thing will only show up one time. \nThere can be multiple wrong things to click in one picure.\nIn the bottom right below the image you can see how many things you need to spot\nIf your selection was false, the screen flashes red, if you are correct, green.";
+let pointsCurrent = 0;
 let totalPoints = 0;
 let wrongAnswers = 0;
 let mapTotalPoints = new Array();
 
-let points = document.querySelector("#points");
-let totalPointsDom = document.querySelector("#total-points");
-let pointsImage = document.querySelector("#points-image");
-let mistakes = document.querySelector("#wrong");
-let rules = document.querySelector("#rules");
-let nextClip = document.querySelector("#next-clip");
+let points = document.querySelector( "#points" );
+let pointsCurrently = document.querySelector( "#points-currently" );
+let totalPointsDom = document.querySelector( "#total-points" );
+let pointsImage = document.querySelector( "#points-image" );
+let mistakes = document.querySelector( "#wrong" );
+let rules = document.querySelector( "#rules" );
+let textWrapper = document.querySelector( "#text-wrapper" );
+let answers = document.querySelector( "#answers" );
+let nextClip = document.querySelector( "#next-clip" );
+let audio =  document.querySelector( "#audio" );
 let video = document.querySelector( "#video" );
 let image = document.querySelector( "#image" );
+let endImage =  document.querySelector( "#end-image" );
+let endText = document.querySelector( "#end-text" );
 let overlayGreen = document.querySelector( "#overlay-green" );
 let overlayRed = document.querySelector( "#overlay-red" );
 let hotspots = document.querySelectorAll( ".hotspots" );
-let hotspot = document.querySelector("#hotspot-1");
-let hotspot2 = document.querySelector("#hotspot-2");
-let hotspot3 = document.querySelector("#hotspot-3");
-let hotspot4 = document.querySelector("#hotspot-4");
-let hotspot5 = document.querySelector("#hotspot-5");
+let hotspot = document.querySelector( "#hotspot-1" );
+let hotspot2 = document.querySelector( "#hotspot-2" );
+let hotspot3 = document.querySelector( "#hotspot-3" );
+let hotspot4 = document.querySelector( "#hotspot-4" );
+let hotspot5 = document.querySelector( "#hotspot-5" );
 
 // Scene and Snippet number
 let sceneNum = 0;
@@ -108,9 +115,19 @@ let cutNum = 0;
 video.src = `assets/videos/scene-${ sceneNum }-snippet-${ cutNum }.mp4`;
 totalPointsDom.textContent = `Total Possible Points : ${dimensions.getTotalAreas()}`;
 // next button
-nextClip.addEventListener("click", nextVideo);
+nextClip.onclick = function(){ nextVideo(); audio.play(); answers.classList.add("hide"); rules.classList.remove("hide");};
 rules.addEventListener("click", function(){alert(rulesText)})
-video.onended = quiz;
+
+// music button
+document.querySelector("#music-button").addEventListener("click", function(){
+    if ( audio.paused ){
+        audio.play();
+    }
+
+    else{
+        audio.pause();
+    }
+})
 
 // start hotspot quiz
 async function quiz(){
@@ -139,10 +156,9 @@ async function quiz(){
         await adjustMap();
         
         // Next snippet
-        cutNum++;
+        nextClip.textContent = "Show Answers";
+        nextClip.onclick = showAnswers;
         nextClip.classList.remove("hide");
-        // document.onkeydown = nextVideo;
-
     }
 
     // If at the end of scene 1 or 2
@@ -168,21 +184,22 @@ async function quiz(){
         await adjustMap();
 
         // show end picture
+        nextClip.textContent = "Show Answers";
+        nextClip.onclick = showAnswers;
         nextClip.classList.remove("hide");
-        nextClip.addEventListener("click", function(){
-            image.src = "assets/images/end-pic.JPG";
-            nextClip.classList.add("hide");
-        });
     }
 
 }
 
-function showAnswers(){
-    nextClip.textContent = "Next Clip";
-}
-
 // play next video
 function nextVideo(){
+    
+    pointsCurrent = 0;
+    pointsCurrently.textContent = `Points (This Image) : ${pointsCurrent}`;
+
+    pointsImage.textContent = "Possible Points For This Image : -"
+    textWrapper.classList.add("hide");
+    answers.classList.add("hide");
     nextClip.classList.add("hide");
     nextClip.textContent = "Show Answers";
     // totalPoints += mapTotalPoints.reduce((acc,c) => acc + c , 0);
@@ -233,6 +250,7 @@ async function adjustMap(){
     adjustPoints();
 }
 
+// flash screen and adjust points
 function adjustPoints(){
 
     image.onclick = async function(){
@@ -274,7 +292,9 @@ function adjustPoints(){
     async function clicking(num){
         console.log(num);
         if ( mapTotalPoints[num] !== 1 ){
-            totalPoints += 1;
+            totalPoints++;
+            pointsCurrent++;
+            pointsCurrently.textContent = `Points (This Image) : ${pointsCurrent}`;
             points.textContent = `Total Points : ${totalPoints}`;
             
             for ( i = 0; i < 2; i++ ){
@@ -297,6 +317,93 @@ async function checkSize(){
 
 // update local storage for scene and cut
 async function updateSceneAndCut(sceneNum, cutNum){
+
     localStorage.setItem("sceneNum", sceneNum);
     localStorage.setItem("cutNum", cutNum);
+}
+
+// end screen
+function endScreen(){
+    textWrapper.classList.add("hide");
+    answers.classList.add("hide");
+    endImage.classList.remove("hide");
+    endText.innerHTML = `<b>Congratulations!</b> <br><br> You finished the Quiz with <b>${totalPoints}</b> out of <b>${dimensions.getTotalAreas()/2}</b> Points and <b>${wrongAnswers}</b> wrong clicks.`
+    endText.classList.remove("hide");
+    document.querySelector("#buttons-container").classList.add("hide");
+    document.querySelector("#scoreboard").classList.add("hide");
+}
+
+// show answers for corresponding scene nad cut
+async function showAnswers(){
+    console.log(sceneNum, cutNum);
+    switch(sceneNum){
+
+        case 0:
+
+            switch(cutNum){
+                case 0:
+                    console.log("testing");
+                    answers.innerHTML = "<b>Hand on door</b><br><br>- Contaminating the door handle with a chemical on your glove can expose someone else to that on bear hands, potentially leading to chemical burns";
+                    break;
+            }
+            break;
+        
+        case 1:
+
+            switch(cutNum){
+                case 0:
+                    answers.innerHTML = "<b>Phone, Shoes, Outfit, Hair</b><br><br>- Contaminating phone screen with chemicals can expose you to chemical burns at a later time, outside the laboratory environment <br>- Incorrect PPE makes you vulnerable to chemical exposure on bare skin, leading to chemical burns or other injuries <br>- Long untied hair can get stuck in lab equipment or come in contact with chemicals";
+                    break;
+        
+                case 1:
+                    answers.innerHTML = "<b>Perfume, things on the desk(Water, Glasses, Phone), Bag</b><br><br>- Personal items like sunglasses or perfume in the lab can be contaminated with chemicals, later exposing you to toxicity<br>- Bulky items like bags can provide a barrier and make it difficult to evacuate the lab in case of emergency eg.fire";
+                    break;
+                
+                case 2:
+                    answers.innerHTML = "<b>Glove on laptop, Chemicals on bench , Food on bench, Drinking</b><br><br>- Eating/drinking in the lab, where the items may be exposed to chemicals, can directly lead to severe health hazards <br>- Touching your laptop with a glove can lead to contamination with toxic chemicals and expose you to chemical burns after you exit the lab";
+                    break;
+            }
+            break;
+
+        case 2:
+            
+            switch(cutNum){
+                case 0:
+                    answers.innerHTML = "<b>no Glove touching Chemicals, Phone, Head in fume hood, Lab Coat</b><br><br>- Using your phone during an experiment can be distracting, which increases the risk of <br>- an accident occurring within the lab. Calculators, timers, and digital cameras are <br>- provided by the lab staff when needed!";
+                    break;
+            
+                case 1:
+                    answers.innerHTML = "<b>Smelling Chemicals, Goggles on Head</b><br><br>- Smelling the chemicals and removing them from the fume hood can expose you to toxic fumes <br>- Not wearing goggles exposes your eyes to hazardous chemicals, flying debris, and potential splashes that could cause serious injury";
+                    break;
+
+                case 2:
+                    answers.innerHTML = "<b>Touching Chemicals</b><br><br>- Touching chemicals with bare hands can lead to skin irritation, chemical burns, and absorption of toxic substances into the body";
+                    break;
+            }
+            break;
+
+        case 3:
+            
+            switch(cutNum){
+                case 0:
+                    answers.innerHTML = "<b>Coats (x 3), Eating with the Glove, Phone with Glove</b><br><br>- Wearing a lab coat on when you are not in the lab can cause contamination with toxic chemicals outside of the lab";
+                    break;
+            }
+            break;
+    }
+
+    image.classList.add("hide");
+    textWrapper.classList.remove("hide");
+    answers.classList.remove("hide");
+    cutNum++;
+
+    if ( sceneNum !== 3 ){
+        nextClip.textContent = "Next Clip"
+        nextClip.onclick = nextVideo;
+    }
+
+    else{
+        nextClip.textContent = "Done"
+        nextClip.onclick = endScreen;
+    }
 }

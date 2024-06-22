@@ -6,11 +6,18 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-#safety-quiz{
+#safety-quiz, #text-wrapper{
 	width: 1280px;
 	height: 720px;
 }
 
+#buttons-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 70%;
+	margin-top: 20px;
+}
 
 
 html, body, div, span, applet, object,
@@ -138,9 +145,13 @@ input, select, textarea {
 		}
 
 		@media screen and (max-width: 1280px) {
-			#safety-quiz{
+			#safety-quiz, #text-wrapper{
 				width: 720px;
 				height: 405px;
+			}
+
+			#answer{
+				/* font-size: 0.7rem; */
 			}
 
 			body, input, select, textarea {
@@ -246,8 +257,11 @@ input, select, textarea {
 	}
 
 	@media screen and (max-width: 736px) {
+		#buttons-container{
+			width: 100%;
+		}
 
-		#safety-quiz{
+		#safety-quiz, #text-wrapper{
 			width: 444px;
 			height: 250px;
 		}
@@ -3932,9 +3946,21 @@ input, select, textarea {
 		}
 		@media screen and (max-width: 480px) {
 
-			#safety-quiz{
+			#safety-quiz, #text-wrapper{
 				width: 303px;
 				height: 170px;
+			}
+
+			#answers, #scoreboard *{
+				font-size: 0.7rem;
+			}
+
+			#buttons-container{
+				flex-direction: column-reverse;
+			}
+
+			#next-clip{
+				width: 100%;
 			}
 
 	
@@ -3957,7 +3983,7 @@ input, select, textarea {
 	display: none !important;
 }
 
-#image, #video{
+#image, #video, #end-image{
 	width: 100%;
 	transition: 0.5s;
 }
@@ -3972,13 +3998,17 @@ input, select, textarea {
 	width: 100%;
 }
 
-#points, #points-image{
+#points-currently, #points-image{
 	margin-top: 20px;
 	margin-bottom: 0;
 }
 
-#total-points, #wrong{
+#total-points, #points{
 	margin-bottom: 10px;
+}
+
+#wrong{
+	margin-bottom: 0;
 }
 
 area{
@@ -4006,14 +4036,6 @@ area{
 	transition: 0.8s;
 }
 
-#buttons-container{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	width: 50%;
-	margin-top: 20px;
-}
-
 #scoreboard{
 	width: 100%;
 	display: flex;
@@ -4027,4 +4049,29 @@ area{
 
 #possible-points{
 	text-align: end;
+}
+
+#text-wrapper{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#answers{
+	text-align: center;
+}
+
+#buttons-container{
+	margin-bottom: 50px;
+	margin-top: 20px;
+}
+
+#end-text{
+	margin-top: 20px;
+}
+
+#music-button{
+	margin: 0 0 20px 0;
+	padding: 0px 10px;
+	font-size: 9px;
 }
