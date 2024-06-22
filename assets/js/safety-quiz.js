@@ -3,6 +3,7 @@
 let dimensions = {
     standartScreenWidth: 1280,
     scalar: 1,
+    totalAreas: 0,
     // coordinates for map areas sorted as [scene][cut][area][coordinates]
     sceneCutArea: [
         [   
@@ -14,10 +15,10 @@ let dimensions = {
             [ 
                 [483,110,513,144,505,194,462,194,459,157],
                 [676,717,540,694,595,643,718,661,710,706],
-                [604,120,565,422,729,411,694,286,741,141] 
+                [604,120,565,422,729,411,694,286,741,141],
+                [648,2,697,2,745,182,705,133,671,130]
             ], 
             [ 
-                [1040,0,1029,226,1112,336,1116,245,1092,14],
                 [682,0,671,19,704,41,726,27,741,0],
                 [519,401,607,469,784,414,604,385,550,258],
                 [24,501,225,719,510,574,445,490,299,425] 
@@ -37,7 +38,8 @@ let dimensions = {
                 [360,37,378,311,516,309,568,181,550,95]
             ], 
             [ 
-                [303,228,247,269,300,313,344,288,355,255] 
+                [303,228,247,269,300,313,344,288,355,255],
+                [292,118,433,175,443,148,378,84,323,72]
             ], 
             [ 
                 [366,397,363,460,391,476,403,441,391,389] 
@@ -52,7 +54,22 @@ let dimensions = {
                 [761,231,717,529,953,523,948,227,797,392] 
             ] 
         ]
-    ]
+    ],
+    // calculate total possible points
+    getTotalAreas: function(){
+        for ( x = 0; x < this.sceneCutArea.length; x++ ){
+            for ( y = 0; y < this.sceneCutArea[x].length; y++ ){
+                for ( z = 0; z < this.sceneCutArea[x][y].length; z++ ){
+                    this.totalAreas++
+                }
+            }
+        }
+        return this.totalAreas;
+    },
+
+    getCurrentAreas: function(scene, cut){
+        return this.sceneCutArea[scene][cut].length;
+    }
 }
 
 // adjust hotspot map to image size
@@ -62,14 +79,21 @@ window.addEventListener('resize', function(){
     }
 });
 
+let rulesText = "Find whats wrong and click it in the picture! \nEach wrong thing will only show up one time. \nThere can be multiple wrong things to click in one picure.\nIn the bottom right below the image you can see how many things you need to spot\nIf your selection was false, the screen flashes red, if you are correct, green.";
 let totalPoints = 0;
+let wrongAnswers = 0;
 let mapTotalPoints = new Array();
 
 let points = document.querySelector("#points");
+let totalPointsDom = document.querySelector("#total-points");
+let pointsImage = document.querySelector("#points-image");
+let mistakes = document.querySelector("#wrong");
+let rules = document.querySelector("#rules");
 let nextClip = document.querySelector("#next-clip");
 let video = document.querySelector( "#video" );
 let image = document.querySelector( "#image" );
-let overlay = document.querySelector( "#overlay" );
+let overlayGreen = document.querySelector( "#overlay-green" );
+let overlayRed = document.querySelector( "#overlay-red" );
 let hotspots = document.querySelectorAll( ".hotspots" );
 let hotspot = document.querySelector("#hotspot-1");
 let hotspot2 = document.querySelector("#hotspot-2");
@@ -82,8 +106,10 @@ let sceneNum = 0;
 let cutNum = 0;
 // Start at this video when refreshing page
 video.src = `assets/videos/scene-${ sceneNum }-snippet-${ cutNum }.mp4`;
-
+totalPointsDom.textContent = `Total Possible Points : ${dimensions.getTotalAreas()}`;
+// next button
 nextClip.addEventListener("click", nextVideo);
+rules.addEventListener("click", function(){alert(rulesText)})
 video.onended = quiz;
 
 // start hotspot quiz
@@ -106,8 +132,10 @@ async function quiz(){
         image.src = `assets/images/scene-${ sceneNum }-snapshot-${ cutNum }.png`;
         image.classList.remove( "hide" );
 
+        pointsImage.textContent = `Possible Points For This Image : ${dimensions.getCurrentAreas( sceneNum, cutNum )}`;
+
         // create map of hotspot areas
-        await updateSceneAndCut(sceneNum, cutNum);
+        await updateSceneAndCut( sceneNum, cutNum );
         await adjustMap();
         
         // Next snippet
@@ -122,7 +150,7 @@ async function quiz(){
         sceneNum++;
         cutNum = 0;
 
-        await updateSceneAndCut(sceneNum, cutNum);
+        await updateSceneAndCut( sceneNum, cutNum );
         nextVideo();
     }
 
@@ -132,6 +160,8 @@ async function quiz(){
         video.classList.add( "hide" );
         image.src = `assets/images/scene-${ 3 }-snapshot-${ 0 }.png`;
         image.classList.remove( "hide" );
+
+        pointsImage.textContent = `Possible Points For This Image : ${dimensions.getCurrentAreas( sceneNum, cutNum )}`;
 
         // create map of hotspot areas
         await updateSceneAndCut(sceneNum, cutNum);
@@ -147,12 +177,17 @@ async function quiz(){
 
 }
 
+function showAnswers(){
+    nextClip.textContent = "Next Clip";
+}
+
 // play next video
 function nextVideo(){
     nextClip.classList.add("hide");
+    nextClip.textContent = "Show Answers";
     // totalPoints += mapTotalPoints.reduce((acc,c) => acc + c , 0);
         // Show points in DOM
-    points.textContent = `Current Points : ${totalPoints}`;
+    points.textContent = `Total Points : ${totalPoints}`;
     mapTotalPoints = [];
         // Hide Screenshot and show Next Video
     image.classList.add( "hide" );
@@ -199,6 +234,18 @@ async function adjustMap(){
 }
 
 function adjustPoints(){
+
+    image.onclick = async function(){
+        wrongAnswers++;
+        mistakes.textContent = `Total False Answers : ${wrongAnswers}`;
+        for ( i = 0; i < 2; i++ ){
+            overlayRed.style.opacity = "1";
+            await new Promise(resolve => setTimeout(resolve, 200));
+            overlayRed.style.opacity = "0";
+            await new Promise(resolve => setTimeout(resolve, 200));
+        }
+    }
+
     // make space in array for points
     mapTotalPoints.push(0);
 
@@ -228,13 +275,13 @@ function adjustPoints(){
         console.log(num);
         if ( mapTotalPoints[num] !== 1 ){
             totalPoints += 1;
-            points.textContent = `Current Points : ${totalPoints}`;
+            points.textContent = `Total Points : ${totalPoints}`;
             
             for ( i = 0; i < 2; i++ ){
-                overlay.style.opacity = "0.8";
-                await new Promise(resolve => setTimeout(resolve, 150));
-                overlay.style.opacity = "0";
-                await new Promise(resolve => setTimeout(resolve, 150));
+                overlayGreen.style.opacity = "1";
+                await new Promise(resolve => setTimeout(resolve, 200));
+                overlayGreen.style.opacity = "0";
+                await new Promise(resolve => setTimeout(resolve, 200));
             }
         }
         mapTotalPoints[num] = 1;

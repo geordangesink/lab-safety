@@ -35,7 +35,8 @@
 							<h1 id="headline" class="major">Safety Video/Quiz</h1>
 							<div id="safety-quiz">
 								<img usemap="#hotspot-map" class="hide" id="image" src="#" alt="" />
-								<div id="overlay" class="green-overlay"></div>
+								<div id="overlay-green" class="overlay"></div>
+								<div id="overlay-red" class="overlay"></div>
 								<map name="hotspot-map">
 									<area 
 										class="hotspots"
@@ -89,9 +90,22 @@
 									<source id="video-source" src="#" type="video/mp4"/>
 								</video>
 							</div>
-							<p id="points">Current Points : 0</p>
-							<p id="total-points">Total Points : 21</p>
-							<button id="next-clip" class="hide">Next Clip</button>
+							<div id="buttons-container">
+								<button id="rules" class="">Rules</button>
+								<div id="next-clip-container">
+									<button id="next-clip" class="hide">Next Clip</button>
+								</div>
+							</div>
+							<div id="scoreboard">
+								<div id="player-points">
+									<p id="points">Total Points : 0</p>
+									<p id="wrong">Total False Answers : 0</p>
+								</div>
+								<div id="possible-points">
+									<p id="points-image">Possible Points For This Image : -</p>
+									<p id="total-points">Total Possible Points : -</p>
+								</div>
+							</div>
 						</div>
 					</section>
 

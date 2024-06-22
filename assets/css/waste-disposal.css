@@ -4,8 +4,8 @@
     right: 10px;
     padding: 10px;
     margin-bottom: 20px;
-    background-color: white;
-    border: 1px solid #000;
+    /* background-color: rgba(255, 255, 255, 0); */
+    /* border: 1px solid #000; */
     z-index: 3;
 }
 
@@ -84,4 +84,9 @@ label {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#instructions{
+    margin-top: 20px;
+    text-align: center;
 }
