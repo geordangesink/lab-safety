@@ -79,12 +79,17 @@ window.addEventListener('resize', function(){
     }
 });
 
+// value variables
 let rulesText = "Find whats wrong and click it in the picture! \nEach wrong thing will only show up one time. \nThere can be multiple wrong things to click in one picure.\nIn the bottom right below the image you can see how many things you need to spot\nIf your selection was false, the screen flashes red, if you are correct, green.";
 let pointsCurrent = 0;
 let totalPoints = 0;
 let wrongAnswers = 0;
 let mapTotalPoints = new Array();
+// Scene and Snippet number
+let sceneNum = 0;
+let cutNum = 0;
 
+// DOM elments
 let points = document.querySelector( "#points" );
 let pointsCurrently = document.querySelector( "#points-currently" );
 let totalPointsDom = document.querySelector( "#total-points" );
@@ -108,12 +113,10 @@ let hotspot3 = document.querySelector( "#hotspot-3" );
 let hotspot4 = document.querySelector( "#hotspot-4" );
 let hotspot5 = document.querySelector( "#hotspot-5" );
 
-// Scene and Snippet number
-let sceneNum = 0;
-let cutNum = 0;
 // Start at this video when refreshing page
 video.src = `assets/videos/scene-${ sceneNum }-snippet-${ cutNum }.mp4`;
 totalPointsDom.textContent = `Total Possible Points : ${dimensions.getTotalAreas()}`;
+
 // next button
 nextClip.onclick = function(){ nextVideo(); audio.play(); answers.classList.add("hide"); rules.classList.remove("hide");};
 rules.addEventListener("click", function(){alert(rulesText)})
