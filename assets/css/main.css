@@ -4059,6 +4059,11 @@ area{
 
 #answers{
 	text-align: center;
+	color: rgb(184, 184, 0);
+}
+
+#answers b{
+	color: yellow;
 }
 
 #buttons-container{

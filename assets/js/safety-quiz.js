@@ -80,7 +80,7 @@ window.addEventListener('resize', function(){
 });
 
 // value variables
-let rulesText = "Find whats wrong and click it in the picture! \nEach wrong thing will only show up one time. \nThere can be multiple wrong things to click in one picure.\nIn the bottom right below the image you can see how many things you need to spot\nIf your selection was false, the screen flashes red, if you are correct, green.";
+let rulesText = "Find whats wrong and click it in the picture! \nEach wrong thing will only show up one time. \nThere can be multiple wrong things to click in one picure.\nIn the bottom right below the image you can see how many things you need to spot\nIf your selection was false, the screen flashes red, if you are correct, green.\nAfter klicking a correct area, you can press any key on your keyboard to show the previous correctly clicked area.";
 let pointsCurrent = 0;
 let totalPoints = 0;
 let wrongAnswers = 0;
