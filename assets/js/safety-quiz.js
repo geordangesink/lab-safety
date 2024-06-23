@@ -80,7 +80,7 @@ window.addEventListener('resize', function(){
 });
 
 // value variables
-let rulesText = "Find whats wrong and click it in the picture! \nEach wrong thing will only show up one time. \nThere can be multiple wrong things to click in one picure.\nIn the bottom right below the image you can see how many things you need to spot\nIf your selection was false, the screen flashes red, if you are correct, green.\nAfter klicking a correct area, you can press any key on your keyboard to show the previous correctly clicked area.";
+let rulesText = "Your goal is to recognize the typical and unusual violation of rules made when performing experiments in a lab during the video. You can advance to the next section and gain points when you identify and click on the area where an error is being made and a rule is being broken. In each scene, only look out for the violations that have not been identified before. (click all errors - score recorded)";
 let pointsCurrent = 0;
 let totalPoints = 0;
 let wrongAnswers = 0;

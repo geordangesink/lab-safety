@@ -3934,7 +3934,10 @@ input, select, textarea {
 				#intro p {
 					font-size: 1em;
 				}
-
+				
+				#answers, #scoreboard *{
+					font-size: 0.6rem;
+				}
 			}
 
 		@media screen and (max-width: 1280px) {
@@ -3952,7 +3955,7 @@ input, select, textarea {
 			}
 
 			#answers, #scoreboard *{
-				font-size: 0.7rem;
+				font-size: 0.4rem;
 			}
 
 			#buttons-container{
@@ -4059,11 +4062,14 @@ area{
 
 #answers{
 	text-align: center;
-	color: rgb(184, 184, 0);
+	color: rgb(27, 27, 27);
+	background-color: rgb(255, 255, 0);
+	padding: 20px;
+	border: 5px solid rgb(177, 177, 0);
 }
 
 #answers b{
-	color: yellow;
+	color: rgb(0, 0, 0);
 }
 
 #buttons-container{
