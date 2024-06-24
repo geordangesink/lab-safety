@@ -1,17 +1,25 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
 #counter {
-    /* position: absolute; */
+    position: absolute;
     top: 10px;
     right: 10px;
     padding: 10px;
-    margin-bottom: 20px;
-    /* background-color: rgba(255, 255, 255, 0); */
-    /* border: 1px solid #000; */
+    background-color: white;
+    border: 1px solid #000;
     z-index: 3;
 }
 
 #container {
     position: relative;
-    width: 800px;
+    width: 900px;
     height: 600px;
     border: 2px solid #000;
 }
@@ -28,15 +36,17 @@
 
 .draggable-container {
     position: absolute;
-    width: 100px; /* Size adjust */
+    width: 100px; /* size */
     text-align: center;
     z-index: 2;
     cursor: move;
+    top: 20px; /* top position */
+    left: 400px; /*left position */
 }
 
 .draggable {
     width: 100%;
-    height: 100px; /* Size adjust */
+    height: 100px; /* Adjust the size as needed */
 }
 
 label {
@@ -49,44 +59,63 @@ label {
     border-radius: 3px;
 }
 
-#dropbox1, #dropbox2 {
+.dropbox {
     position: absolute;
-    width: 150px;
-    height: 150px;
-    border: 2px dashed #000;
-    z-index: 2;
-    top: 400px; /* position */
+    width: 130px;
+    height: 130px;
+    z-index: 10;
 }
 
+.dropbox-img {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    object-fit: cover;
+}
+
+/* dropbox position */
 #dropbox1 {
-    left: 100px; /* position */
+    bottom: 10px;
+    left: -10px;
 }
-
 #dropbox2 {
-    right: 100px; /* position */
+    bottom: 10px;
+    left: 102px;
+}
+#dropbox3 {
+    bottom: 10px;
+    left: 214px;
+}
+#dropbox4 {
+    bottom: 10px;
+    left: 326px;
+}
+#dropbox5 {
+    bottom: 10px;
+    left: 438px;
+}
+#dropbox6 {
+    bottom: 10px;
+    left: 550px;
+}
+#dropbox7 {
+    bottom: 10px;
+    left: 662px;
+}
+#dropbox8 {
+    bottom: 10px;
+    left: 774px;
 }
 
-.message {
-    position: absolute;
-    bottom: -30px;
+#congratulations-message {
+    position: fixed;
+    top: 30%;
     left: 50%;
-    transform: translateX(-50%);
-    width: 150px;
-    text-align: center;
+    transform: translate(-50%, -50%);
     background-color: white;
-    border: 1px solid #000;
-    z-index: 3;
-    display: none; /* Initially hidden */
-}
-
-#waste-disposal-game{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#instructions{
-    margin-top: 20px;
+    border: 2px solid #000;
+    padding: 20px;
+    font-size: 24px;
     text-align: center;
+    z-index: 20;
 }
