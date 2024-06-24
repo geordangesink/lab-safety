@@ -1,29 +1,81 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const draggables = document.querySelectorAll('.draggable');
+    const draggables = Array.from(document.querySelectorAll('.draggable'));
     const dropboxes = document.querySelectorAll('.dropbox');
     const counter = document.getElementById('counter');
     let incorrectAttempts = 0;
 
-    // Correct key
+    // Correct mapping key
     const correctMapping = {
-        'draggable1': 'dropbox1',
-        'draggable2': 'dropbox2',
-        'draggable3': 'dropbox1'
+        'draggable1': 'dropbox6',
+        'draggable2': 'dropbox1',
+        'draggable3': 'dropbox8',
+        'draggable4': 'dropbox2',
+        'draggable5': 'dropbox3',
+        'draggable6': 'dropbox2',
+        'draggable7': 'dropbox1',
+        'draggable8': 'dropbox1',
+        'draggable9': 'dropbox1',
+        'draggable10': 'dropbox4',
+        'draggable11': 'dropbox7',
+        'draggable12': 'dropbox7',
+        'draggable13': 'dropbox3',
+        'draggable14': 'dropbox5',
+        'draggable15': 'dropbox4',
+        'draggable16': 'dropbox7'
     };
 
-    // Initial position
     const initialPositions = {};
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    // Hide all draggable elements except the first one in the shuffled array
+    function initializeDraggables() {
+        shuffle(draggables);
+        draggables.forEach((draggable, index) => {
+            const container = draggable.parentElement;
+            initialPositions[draggable.id] = {
+                left: container.style.left,
+                top: container.style.top
+            };
+
+            if (index !== 0) {
+                container.style.display = 'none';
+            }
+        });
+    }
+
+    // Show the next draggable element
+    function showNextDraggable() {
+        for (let i = 0; i < draggables.length; i++) {
+            const container = draggables[i].parentElement;
+            if (container.style.display === 'none') {
+                container.style.display = 'block';
+                break;
+            }
+        }
+    }
+
+    // End check for draggables
+    function checkCompletion() {
+        const remainingDraggables = document.querySelectorAll('.draggable-container');
+        if (remainingDraggables.length === 0) {
+            const message = document.createElement('div');
+            message.id = 'congratulations-message';
+            message.textContent = `Congratulations! You have made ${incorrectAttempts} mistakes`;
+            document.body.appendChild(message);
+        }
+    }
 
     draggables.forEach(draggable => {
         const container = draggable.parentElement;
-        // Store the initial position
-        initialPositions[draggable.id] = {
-            left: container.style.left,
-            top: container.style.top
-        };
 
         draggable.addEventListener('dragstart', (event) => {
-            event.dataTransfer.setData('text/plain', null); // Firefox fix
+            event.dataTransfer.setData('text/plain', null); // fix for firefox
             const style = window.getComputedStyle(container, null);
             event.dataTransfer.setData('text/plain', 
                 (parseInt(style.getPropertyValue('left'), 10) - event.clientX) + ',' + 
@@ -50,35 +102,41 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 dropbox.removeChild(existingMessage);
             }
 
-            // Create a message
             const message = document.createElement('div');
             message.className = 'message';
 
-            // Check if chemical is correct
+            // check if correct
             if (correctMapping[draggableId] === dropbox.id) {
                 message.textContent = 'Correct!';
                 message.style.backgroundColor = 'lightgreen';
-                container.style.left = '0px';
-                container.style.top = '0px';
-                dropbox.appendChild(container); // Move the chemical into the drop box
+                container.remove();
+                // show next chemical
+                showNextDraggable();
             } else {
                 message.textContent = 'Wrong!';
                 message.style.backgroundColor = 'lightcoral';
-                // Incorrect attempts counter
+                // increment the incorrect attempts counter
                 incorrectAttempts += 1;
                 counter.textContent = `Incorrect Attempts: ${incorrectAttempts}`;
-                // Reset to initial position
+                // Reset the draggable object to its initial position
                 container.style.left = initialPositions[draggableId].left;
                 container.style.top = initialPositions[draggableId].top;
+                container.style.display = 'block';
             }
 
-            // Show message for a few seconds under the dropbox
+            
             dropbox.appendChild(message);
 
+            // show the message
             message.style.display = 'block';
             setTimeout(() => {
                 message.style.display = 'none';
             }, 2000);
+
+            checkCompletion();
         });
     });
+
+    // Initialize: Show only the first draggable element in the shuffled order
+    initializeDraggables();
 });
