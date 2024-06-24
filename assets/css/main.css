@@ -112,7 +112,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: #0a1441;
+		background: rgb(116,153,179);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -4063,9 +4063,9 @@ area{
 #answers{
 	text-align: center;
 	color: rgb(27, 27, 27);
-	background-color: rgb(255, 255, 0);
+	background-color: rgb(255, 255, 167);
 	padding: 20px;
-	border: 5px solid rgb(177, 177, 0);
+	border: 5px solid rgb(255, 255, 255);
 }
 
 #answers b{
@@ -4085,4 +4085,8 @@ area{
 	margin: 0 0 20px 0;
 	padding: 0px 10px;
 	font-size: 9px;
+}
+
+#abstract{
+	text-align: justify;
 }

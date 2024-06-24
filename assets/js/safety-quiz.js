@@ -261,9 +261,8 @@ function adjustPoints(){
         mistakes.textContent = `Total False Answers : ${wrongAnswers}`;
         for ( i = 0; i < 2; i++ ){
             overlayRed.style.opacity = "1";
-            await new Promise(resolve => setTimeout(resolve, 200));
+            await new Promise(resolve => setTimeout(resolve, 500));
             overlayRed.style.opacity = "0";
-            await new Promise(resolve => setTimeout(resolve, 200));
         }
     }
 
@@ -302,9 +301,8 @@ function adjustPoints(){
             
             for ( i = 0; i < 2; i++ ){
                 overlayGreen.style.opacity = "1";
-                await new Promise(resolve => setTimeout(resolve, 200));
+                await new Promise(resolve => setTimeout(resolve, 500));
                 overlayGreen.style.opacity = "0";
-                await new Promise(resolve => setTimeout(resolve, 200));
             }
         }
         mapTotalPoints[num] = 1;

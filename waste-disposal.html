@@ -34,27 +34,116 @@
 					<section id="main" class="wrapper">
 						<div id="waste-disposal" class="inner">
 							<h1 id="headline" class="major">Waste Disposal Game</h1>
-							<div id="waste-disposal-game">
+							<div id="waste-disposal-game" class="hide">
 								<div id="counter">Incorrect Attempts: 0</div>
     							<div id="container">
-    							    <img src="assets/images/background.JPG" alt="Background" id="background">
-    							    <div class="draggable-container" id="draggable1-container">
-    							        <img src="assets/images/draggable.jpg" alt="Draggable 1" class="draggable" id="draggable1" draggable="true">
-    							        <label for="draggable1">Draggable 1</label>
-    							    </div>
-    							    <div class="draggable-container" id="draggable2-container">
-    							        <img src="assets/images/draggable.jpg" alt="Draggable 2" class="draggable" id="draggable2" draggable="true">
-    							        <label for="draggable2">Draggable 2</label>
-    							    </div>
-    							    <div class="draggable-container" id="draggable3-container">
-    							        <img src="assets/images/draggable.jpg" alt="Draggable 3" class="draggable" id="draggable3" draggable="true">
-    							        <label for="draggable3">Draggable 3</label>
-    							    </div>
-    							    <div class="dropbox" id="dropbox1"></div>
-    							    <div class="dropbox" id="dropbox2"></div>
+    							    <!-- <img src="assets/images/background.JPG" alt="Background" id="background"> -->
+
+    							    <!-- Draggable objects -->
+									<div id="draggable-objects">
+										<p id="congratulations-message" class="hide"></p>
+										<div class="draggable-container" id="draggable1-container">
+											<img src="assets/images/chemicals/acetic-acid.png" alt="Draggable 1" class="draggable" id="draggable1" draggable="true">
+											<label for="draggable1">Acetic Acid</label>
+										</div>
+										<div class="draggable-container" id="draggable2-container">
+											<img src="assets/images/chemicals/acetone.png" alt="Draggable 2" class="draggable" id="draggable2" draggable="true">
+											<label for="draggable2">Acetone</label>
+										</div>
+										<div class="draggable-container" id="draggable3-container">
+											<img src="assets/images/chemicals/broken-glass.png" alt="Draggable 3" class="draggable" id="draggable3" draggable="true">
+											<label for="draggable3">Broken Glass</label>
+										</div>
+										<div class="draggable-container" id="draggable4-container">
+											<img src="assets/images/chemicals/Chloroform.png" alt="Draggable 4" class="draggable" id="draggable4" draggable="true">
+											<label for="draggable4">Chloroform</label>
+										</div>
+										<div class="draggable-container" id="draggable5-container">
+											<img src="assets/images/chemicals/copper-sulfate.png" alt="Draggable 5" class="draggable" id="draggable5" draggable="true">
+											<label for="draggable5">Copper Sulfate (Aq)</label>
+										</div>
+										<div class="draggable-container" id="draggable6-container">
+											<img src="assets/images/chemicals/dichloromethane.png" alt="Draggable 6" class="draggable" id="draggable6" draggable="true">
+											<label for="draggable6">Dichloromethane</label>
+										</div>
+										<div class="draggable-container" id="draggable7-container">
+											<img src="assets/images/chemicals/diethyl-ether.png" alt="Draggable 7" class="draggable" id="draggable7" draggable="true">
+											<label for="draggable7">Diethyl Ether</label>
+										</div>
+										<div class="draggable-container" id="draggable8-container">
+											<img src="assets/images/chemicals/DMSO.png" alt="Draggable 8" class="draggable" id="draggable8" draggable="true">
+											<label for="draggable8">DMSO</label>
+										</div>
+										<div class="draggable-container" id="draggable9-container">
+											<img src="assets/images/chemicals/ethanol.png" alt="Draggable 9" class="draggable" id="draggable9" draggable="true">
+											<label for="draggable9">Ethanol</label>
+										</div>
+										<div class="draggable-container" id="draggable10-container">
+											<img src="assets/images/chemicals/hydrochloric-acid.png" alt="Draggable 10" class="draggable" id="draggable10" draggable="true">
+											<label for="draggable10">Hydrochloric Acid</label>
+										</div>
+										<div class="draggable-container" id="draggable11-container">
+											<img src="assets/images/chemicals/pasteur-pipette.png" alt="Draggable 11" class="draggable" id="draggable11" draggable="true">
+											<label for="draggable11">Pasteur Pipette</label>
+										</div>
+										<div class="draggable-container" id="draggable12-container">
+											<img src="assets/images/chemicals/powders.png" alt="Draggable 12" class="draggable" id="draggable12" draggable="true">
+											<label for="draggable12">Powders</label>
+										</div>
+										<div class="draggable-container" id="draggable13-container">
+											<img src="assets/images/chemicals/sodium-chloride.png" alt="Draggable 13" class="draggable" id="draggable13" draggable="true">
+											<label for="draggable13">Sodium Chloride (Aq)</label>
+										</div>
+										<div class="draggable-container" id="draggable14-container">
+											<img src="assets/images/chemicals/sodium-hydroxide.png" alt="Draggable 14" class="draggable" id="draggable14" draggable="true">
+											<label for="draggable14">Sodium Hydroxide</label>
+										</div>
+										<div class="draggable-container" id="draggable15-container">
+											<img src="assets/images/chemicals/sulfuric-acid.png" alt="Draggable 15" class="draggable" id="draggable15" draggable="true">
+											<label for="draggable15">Sulfuric Acid</label>
+										</div>
+										<div class="draggable-container" id="draggable16-container">
+											<img src="assets/images/chemicals/used-gloves.png" alt="Draggable 16" class="draggable" id="draggable16" draggable="true">
+											<label for="draggable16">Used Gloves</label>
+										</div>
+									</div>
+									
+									<!-- Drop boxes -->
+									<div id="dropboxes">
+										<div class="dropbox" id="dropbox1">
+											<img src="assets/images/bins/nhlf.png" alt="Non-halogenated Liquid Flammable" class="dropbox-img">
+										</div>
+										<div class="dropbox" id="dropbox2">
+											<img src="assets/images/bins/hlf.png" alt="Halogenated Liquid Flammable" class="dropbox-img">
+										</div>
+										<div class="dropbox" id="dropbox3">
+											<img src="assets/images/bins/low-caloric.png" alt="Low Caloric" class="dropbox-img">
+										</div>
+										<div class="dropbox" id="dropbox4">
+											<img src="assets/images/bins/inorganic-acids.png" alt="Inorganic acids" class="dropbox-img">
+										</div>
+										<div class="dropbox" id="dropbox5">
+											<img src="assets/images/bins/inorganic-bases.png" alt="Inorganic bases" class="dropbox-img">
+										</div>
+										<div class="dropbox" id="dropbox6">
+											<img src="assets/images/bins/organic-acid.png" alt="Organic Acid" class="dropbox-img">
+										</div>
+										<div class="dropbox" id="dropbox7">
+											<img src="assets/images/bins/solid-waste.png" alt="Solid Waste" class="dropbox-img">
+										</div>
+										<div class="dropbox" id="dropbox8">
+											<img src="assets/images/bins/broken-glass.png" alt="Broken Glass" class="dropbox-img">
+										</div>
+									</div>
     							</div>
 							</div>
+							<div id="waste-rules">
+								<img id="waste-rule-img" src="assets/images/waste-rules.jpg" alt="waste disposal rules">
+							</div>
 							<p id="instructions">Drag various chemicals to the correct waste containers, and if you're uncertain, use the provided hints and guidelines to learn the right methods.</p>
+							<div id="start-game-container">
+								<button id="start-game">Start Game</button>
+							</div>
 						</div>
 					</section>
 
