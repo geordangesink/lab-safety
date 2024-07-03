@@ -370,7 +370,7 @@ async function showAnswers(){
             
             switch(cutNum){
                 case 0:
-                    answers.innerHTML = "<b>no Glove touching Chemicals, Phone, Head in fume hood, Lab Coat</b><br><br>- Using your phone during an experiment can be distracting, which increases the risk of <br>- an accident occurring within the lab. Calculators, timers, and digital cameras are <br>- provided by the lab staff when needed!";
+                    answers.innerHTML = "<b>no Glove touching Chemicals, Phone, Head in fume hood, Lab Coat</b><br><br>- Using your phone during an experiment can be distracting, which increases the risk of an accident occurring within the lab. <br>- Calculators, timers, and digital cameras are provided by the lab staff when needed!";
                     break;
             
                 case 1:

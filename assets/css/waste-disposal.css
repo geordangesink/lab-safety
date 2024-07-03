@@ -11,6 +11,7 @@
 
 #container {
     background-image: url("../images/background.JPG");
+    background-size: contain;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -151,9 +152,13 @@ label {
 }
 
 @media screen and (max-width: 1280px) {
-    #container, #waste-rules {
+    #container{
         width: 720px;
 		height: 405px;
+    }
+
+    #waste-rules{
+        height: 405px;
     }
 
     label {
@@ -162,9 +167,13 @@ label {
 }
 
 @media screen and (max-width: 736px) {
-    #container, #waste-rules {
+    #container{
         width: 444px;
 		height: 250px;
+    }
+
+    #waste-rules{
+        height: 250px;
     }
 
     label {
@@ -177,9 +186,13 @@ label {
 }
 
 @media screen and (max-width: 480px) {
-    #container, #waste-rules {
+    #container{
         width: 303px;
 		height: 170px;
+    }
+
+    #waste-rules{
+        height: 170px;
     }
 
     label {

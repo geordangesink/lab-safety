@@ -1,9 +1,3 @@
-document.querySelector("#start-game").addEventListener("click", function(){
-    document.querySelector("#start-game-container").classList.add("hide");
-    document.querySelector("#waste-rules").classList.add("hide");
-    document.querySelector("#waste-disposal-game").classList.remove("hide");
-});
-
 document.addEventListener('DOMContentLoaded', (event) => {
     const draggables = Array.from(document.querySelectorAll('.draggable'));
     const dropboxes = document.querySelectorAll('.dropbox');

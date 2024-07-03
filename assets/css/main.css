@@ -3276,7 +3276,7 @@ input, select, textarea {
 		}
 
 		.wrapper.style1-alt {
-			background-color: #5e42a600;
+			background-color: #0a1441;
 		}
 
 		.wrapper.style2 {
@@ -4089,4 +4089,20 @@ area{
 
 #abstract{
 	text-align: justify;
+}
+
+#instructions, #counter, #end-text, #scoreboard{
+	color: rgba(255, 255, 255, 0.747);
+}
+
+footer{
+	background-color: #0a1441;
+}
+
+.justify{
+	text-align: justify;
+}
+
+.start{
+	text-align: start;
 }
